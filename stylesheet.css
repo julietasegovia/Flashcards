@@ -111,13 +111,9 @@ body {
 	cursor: pointer;
     transform-style: preserve-3d;
     transform-origin: center center;
-}
-
-.card img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .card.center {
@@ -130,11 +126,7 @@ body {
 }
 
 .card.flipped {
-    transform: scale(1.1) rotateY(130deg);
-}
-
-.card.center img {
-	filter: none;
+    transform: scale(1.1) rotateY(120deg);
 }
 
 .card.up-2 {
@@ -143,18 +135,10 @@ body {
 	opacity: 0.7;
 }
 
-.card.up-2 img {
-	filter: grayscale(100%);
-}
-
 .card.up-1 {
 	z-index: 5;
 	transform: translateY(-150px) scale(0.9) translateZ(-100px);
 	opacity: 0.9;
-}
-
-.card.up-1 img {
-	filter: grayscale(100%);
 }
 
 .card.down-1 {
@@ -163,27 +147,25 @@ body {
 	opacity: 0.9;
 }
 
-.card.down-1 img {
-	filter: grayscale(100%);
-}
-
 .card.down-2 {
 	z-index: 1;
 	transform: translateY(300px) scale(0.8) translateZ(-300px);
 	opacity: 0.7;
 }
 
-.card.down-2 img {
-	filter: grayscale(100%);
-}
-
-.card.down-2 img {
-	filter: grayscale(100%);
-}
-
 .card.hidden {
 	opacity: 0;
 	pointer-events: none;
+}
+
+.question, .answer{
+    background: transparent;
+    position: relative;
+    text-align: center;
+}
+
+.question.hidden, .answer.hidden{
+    display: none;
 }
 
 .dots {
@@ -251,6 +233,10 @@ body {
 
 .nav-arrow.up {
 	transform: none;
+}
+
+.nav-arrow.up img{
+	transform: rotate(180deg);
 }
 
 .nav-arrow.down {

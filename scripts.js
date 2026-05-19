@@ -1,12 +1,3 @@
-const teamMembers = [
-	{ name: "Luffy", role: "Founder" },
-	{ name: "Monkey D. Luffy", role: "Creative Director" },
-	{ name: "Luffy chan", role: "Lead Developer" },
-	{ name: "Lucy", role: "UX Designer" },
-	{ name: "Luffy kun", role: "Marketing Manager" },
-	{ name: "Monkey chan", role: "Product Manager" }
-];
-
 const cards = document.querySelectorAll(".card");
 const dots = document.querySelectorAll(".dot");
 const upArrows = document.querySelectorAll(".nav-arrow.up");
@@ -84,6 +75,38 @@ cards.forEach((card, i) => {
     })
 })
 
+cards.forEach((card) => {
+    card.querySelector(".answer").classList.add("hidden");
+});
+
+const flippedState = new Array(cards.length).fill(false);
+
+cards.forEach((card, i) => {
+    card.addEventListener("click", () => {
+        if (isAnimating) return;
+
+        const question = card.querySelector(".question");
+        const answer = card.querySelector(".answer");
+
+        question.classList.add("hidden");
+        answer.classList.add("hidden");
+        card.classList.add("flipping");
+
+        setTimeout(() => {
+            flippedState[i] = !flippedState[i];
+
+            if(flippedState[i]){
+                answer.classList.remove("hidden");
+            } else {
+                question.classList.remove("hidden");
+            }
+
+            card.classList.remove("flipping");
+        }, 400);
+    });
+});
+
+
 document.addEventListener("keydown", (e) => {
 	if (e.key === "ArrowUp") {
 		updateCarousel(currentIndex - 1);
@@ -107,6 +130,14 @@ function createScrollIndicator() {
 
 // Initialize scroll indicator
 createScrollIndicator();
+
+document.addEventListener("wheel", (e) => {
+    if(e.deltaY > 0){
+        updateCarousel(currentIndex + 1);
+    } else {
+        updateCarousel(currentIndex - 1);
+    }
+});
 
 document.addEventListener("touchstart", (e) => {
 	touchStartX = e.changedTouches[0].screenY;
