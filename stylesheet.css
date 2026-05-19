@@ -1,0 +1,320 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+#super-btn {
+    position: fixed;
+    right: 32px;
+    bottom: 32px;
+    z-index: 1000;
+    display: inline-block;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+    width: 56px;
+    height: 56px;
+    background: #fff;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+#super-btn:hover {
+    box-shadow: 0 4px 24px rgba(0,0,0,0.28);
+    transform: scale(1.07);
+}
+#super-btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16px;
+    display: block;
+}
+body {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background-color: #f5f5f5;
+	overflow: hidden;
+	scroll-behavior: smooth;
+	margin: 0;
+	padding: 20px 0;
+}
+
+.main-container {
+	display: flex;
+    flex-direction: column;
+	width: 100%;
+	max-width: 1200px;
+	height: 80vh;
+	gap: 60px;
+	align-items: center;
+	justify-content: center;
+}
+
+.carousel-section {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.controls-section {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 40px;
+	padding-left: 40px;
+}
+
+.carousel-container {
+	width: 100%;
+	max-width: 500px;
+	height: 70vh;
+	position: relative;
+	perspective: 1000px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.carousel-container .nav-arrow {
+	display: none;
+}
+
+.carousel-track {
+	width: 650px;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	transform-style: preserve-3d;
+	transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    perspective: 1000px;
+}
+
+.card {
+	position: absolute;
+	width: 600px;
+	height: 425px;
+	background: white;
+	border-radius: 20px;
+	overflow: hidden;
+	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+	transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	cursor: pointer;
+    transform-style: preserve-3d;
+    transform-origin: center center;
+}
+
+.card img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card.center {
+	z-index: 10;
+	transform: scale(1.1) translateZ(0);
+}
+
+.card.center.clicked{
+    animation: openCards 2s linear;
+}
+
+.card.flipped {
+    transform: scale(1.1) rotateY(130deg);
+}
+
+.card.center img {
+	filter: none;
+}
+
+.card.up-2 {
+	z-index: 1;
+	transform: translateY(-300px) scale(0.8) translateZ(-300px);
+	opacity: 0.7;
+}
+
+.card.up-2 img {
+	filter: grayscale(100%);
+}
+
+.card.up-1 {
+	z-index: 5;
+	transform: translateY(-150px) scale(0.9) translateZ(-100px);
+	opacity: 0.9;
+}
+
+.card.up-1 img {
+	filter: grayscale(100%);
+}
+
+.card.down-1 {
+	z-index: 5;
+	transform: translateY(150px) scale(0.9) translateZ(-100px);
+	opacity: 0.9;
+}
+
+.card.down-1 img {
+	filter: grayscale(100%);
+}
+
+.card.down-2 {
+	z-index: 1;
+	transform: translateY(300px) scale(0.8) translateZ(-300px);
+	opacity: 0.7;
+}
+
+.card.down-2 img {
+	filter: grayscale(100%);
+}
+
+.card.down-2 img {
+	filter: grayscale(100%);
+}
+
+.card.hidden {
+	opacity: 0;
+	pointer-events: none;
+}
+
+.dots {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+    margin-top: -20px;
+}
+
+.dot {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	background: rgba(8, 42, 123, 0.2);
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.dot.active {
+	background: rgb(8, 42, 123);
+	transform: scale(1.2);
+}
+
+.nav-arrow {
+	position: relative;
+	background: transparent;
+	color: white;
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	z-index: 20;
+	transition: all 0.3s ease;
+	font-size: 1.5rem;
+	border: none;
+	outline: none;
+	margin: 0;
+	padding: 0;
+	overflow: visible;
+	box-shadow: none;
+}
+
+.nav-arrow:hover {
+	background: transparent;
+	transform: scale(1.2);
+	box-shadow: none;
+	border-color: transparent;
+}
+
+.nav-arrow img {
+	width: 60px;
+	height: 60px;
+	object-fit: contain;
+	filter: none;
+	transition: all 0.3s ease;
+}
+
+.nav-arrow:hover img {
+	filter: none;
+	transform: scale(1.1);
+}
+
+.nav-arrow.up {
+	transform: none;
+}
+
+.nav-arrow.down {
+	transform: none;
+}
+
+.nav-controls {
+	display: flex;
+	flex-direction: row;
+	gap: 30px;
+	align-items: center;
+	justify-content: center;
+}
+
+.scroll-indicator {
+	position: fixed;
+	bottom: 30px;
+	right: 30px;
+	background: rgba(8, 42, 123, 0.8);
+	color: white;
+	padding: 8px 16px;
+	border-radius: 20px;
+	font-size: 0.8rem;
+	text-align: center;
+	z-index: 1000;
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	animation: scrollFadeOut 5s ease-in-out forwards;
+	font-weight: 500;
+	line-height: 1;
+}
+
+.scroll-indicator span {
+	font-size: 0.75rem;
+	opacity: 0.9;
+	display: block;
+	margin-top: 2px;
+}
+
+@keyframes scrollFadeOut {
+	0% {
+		opacity: 0;
+		transform: scale(0.8);
+	}
+	10% {
+		opacity: 1;
+		transform: scale(1);
+	}
+	90% {
+		opacity: 1;
+		transform: scale(1);
+	}
+	100% {
+		opacity: 0;
+		transform: scale(0.8);
+		visibility: hidden;
+	}
+}
+
+@keyframes openCards {
+    0%{
+        transform: rotate3d(0deg);
+    }
+    100% {
+        transform: rotate3d(90deg);
+    }
+}
